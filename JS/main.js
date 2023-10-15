@@ -1,3 +1,10 @@
-const canvas = document.querySelector("canvas");
-const gl = canvas.getContext("webgl");
-console.log("a");
+class TxtFile {
+    static async read(path) {
+        const file = await fetch(path);
+        const text = await file.text();
+        return text;
+    }
+}
+TxtFile.read("Assets/positions.txt").then(res => {
+    console.log(res);
+});
