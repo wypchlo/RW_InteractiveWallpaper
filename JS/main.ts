@@ -2,11 +2,13 @@ class TxtFile{
     static async read(path : string)
     {
         const file : Response = await fetch(path);
-        const text : string = await file.text();
-        return text;
+        return await file.text();
     }
 }
 
-TxtFile.read("Assets/positions.txt").then(res => {
-    console.log(res);
-});
+async function main(){
+    const text = await TxtFile.read("Assets/positions.txt");
+    console.log(text);
+}
+
+main();
