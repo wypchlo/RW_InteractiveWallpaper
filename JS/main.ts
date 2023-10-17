@@ -17,31 +17,26 @@ class TxtFile{
         this.path = path;
     }
 
-    static init(path : string)
+    public static init(path : string)
     {
+        //returns the result of a function using the constructor to create the object
         return (async function () 
         {
             let self = new TxtFile(path);
-            await self.set();
+            await self.setValues();
             return self;
         }())
     }
 
-    async set(){
+    private async setValues(){
         this.file = await fetch(this.path);
         this.text = await this.file.text();
         this.lines = this.text.split("\n");
     }
 
-    async getText()
-    {
-        return this.text;
-    }
+    public getText = () => this.text;
 
-    async readLine(index : number)
-    {
-        return this.lines[index];
-    }
+    public readLine = (index : number) => this.lines[index];
 }
 
 async function main(){
