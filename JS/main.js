@@ -1,6 +1,7 @@
 import { TxtFile } from "./classes.js";
 async function main() {
     const positions = await TxtFile.init("Assets/positions.txt");
-    console.log(positions.readLine(1));
+    let position = positions.getVectorFromLineIndex(1);
+    console.log(position);
 }
 main();

@@ -1,8 +1,8 @@
 export class Vector2
 {
-    x;
-    y;
-    constructor(x, y)
+    x : number;
+    y : number;
+    constructor(x : number, y : number)
     {
         this.x = x,
         this.y = y;
@@ -15,12 +15,12 @@ export class TxtFile
     text : string;
     lines : string[];
 
-    constructor(path : string)
+    constructor (path : string)
     {
         this.path = path;
     }
 
-    public static init(path : string)
+    public static init (path : string)
     {
         return async function() 
         {
@@ -39,4 +39,11 @@ export class TxtFile
     public getText = () => this.text;
 
     public readLine = (index : number) => this.lines[index];
+
+    public getVectorFromLineIndex (index : number)
+    {
+        let lineSplit = this.lines[index].split(", ");
+        return new Vector2(Number(lineSplit[0]), Number(lineSplit[1]));
+    }
 }
+

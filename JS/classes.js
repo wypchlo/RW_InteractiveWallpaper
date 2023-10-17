@@ -27,4 +27,8 @@ export class TxtFile {
     }
     getText = () => this.text;
     readLine = (index) => this.lines[index];
+    getVectorFromLineIndex(index) {
+        let lineSplit = this.lines[index].split(", ");
+        return new Vector2(Number(lineSplit[0]), Number(lineSplit[1]));
+    }
 }
