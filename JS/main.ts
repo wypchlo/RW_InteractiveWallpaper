@@ -1,14 +1,24 @@
 import { Vector2, TxtFile } from "./classes.js";
 
-const RESOLUTION = new Vector2(window.innerHeight / 9 * 16, window.innerHeight);
-const RESOLUTION_MULTIPLIER = new Vector2(RESOLUTION.x / 1366, RESOLUTION.y / 786);
-const canvasContainer = document.querySelector("#canvasContainer");
-
 async function main()
 {
-    const positions = await TxtFile.init("Assets/positions.txt");
-    let position : Vector2 = positions.getVectorFromLineIndex(1);
-    console.log(position);
+    const canvas = document.querySelector("canvas");
+    const gl = canvas.getContext("webgl");
+
+    const program = gl.createProgram();
+
+    // SHADERS //
+
+    const vertShaderFile = await TxtFile.init("Shaders/vertexShader.vert");
+    const fragShaderFile = await TxtFile.init("Shaders/fragmentShader.frag");
+    
+    const vertShaderText : string = vertShaderFile.getText();
+    const fragShaderText : string = fragShaderFile.getText();
+
+    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    const fragmentShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertexShader, vertShaderText);
+    gl.shaderSource(fragmentShader, fragShaderText);
 }
 
 main();

@@ -1,7 +1,16 @@
 import { TxtFile } from "./classes.js";
 async function main() {
-    const positions = await TxtFile.init("Assets/positions.txt");
-    let position = positions.getVectorFromLineIndex(1);
-    console.log(position);
+    const canvas = document.querySelector("canvas");
+    const gl = canvas.getContext("webgl");
+    const program = gl.createProgram();
+    // SHADERS //
+    const vertShaderFile = await TxtFile.init("Shaders/vertexShader.vert");
+    const fragShaderFile = await TxtFile.init("Shaders/fragmentShader.frag");
+    const vertShaderText = vertShaderFile.getText();
+    const fragShaderText = fragShaderFile.getText();
+    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    const fragmentShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertexShader, vertShaderText);
+    gl.shaderSource(fragmentShader, fragShaderText);
 }
 main();
